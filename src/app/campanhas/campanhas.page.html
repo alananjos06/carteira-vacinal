@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Campanhas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let campanha of campanhas">
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-badge color="secondary">Ativa</ion-badge>
+      </ion-card-subtitle>
+      <ion-card-title>{{ campanha.nome }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ campanha.descricao }}</p>
+      <p><strong>Público-alvo:</strong> {{ campanha.publicoAlvo }}</p>
+      <p><strong>Período:</strong> {{ campanha.dataInicio | date:'dd/MM/yyyy' }} a {{ campanha.dataFim | date:'dd/MM/yyyy' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="campanhas.length === 0" style="text-align: center; padding: 32px;">
+    Nenhuma campanha ativa no momento.
+  </div>
+</ion-content>
