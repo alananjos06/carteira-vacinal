@@ -55,7 +55,8 @@ ionic serve
 - Notificações de vacinas próximas do vencimento
 
 ## Aplicação publicada
-[Em breve]
+[Acesse a aplicação aqui](https://carteira-vacinal-alana.web.app):
+(https://carteira-vacinal-alana.web.app)
 
 ## Autora
 Alana Anjos
