@@ -14,9 +14,7 @@
         <h2>{{ crianca.nome }}</h2>
         <p>{{ crianca.calcularIdadeFormatada() }}</p>
       </ion-label>
-      <ion-badge slot="end" [color]="temPendencia(crianca.id) ? 'tertiary' : 'primary'">
-        {{ temPendencia(crianca.id) ? 'Pendência' : 'Em dia' }}
-      </ion-badge>
+      <app-status-badge slot="end" [status]="statusDaCrianca(crianca.id)"></app-status-badge>
     </ion-item>
   </ion-list>
 </ion-content>

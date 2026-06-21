@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
-  IonButtons, IonButton, IonList, IonItem, IonLabel, IonBadge
+  IonButtons, IonButton, IonList, IonItem, IonLabel
 } from '@ionic/angular/standalone';
 import { Crianca } from '../models/crianca.model';
 import { StatusVacina } from '../models/status-vacina.enum';
 import { CriancaService } from '../services/crianca.service';
 import { DoseVacinaService } from '../services/dose-vacina.service';
+import { StatusBadgeComponent } from '../components/status-badge/status-badge.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonList, IonItem, IonLabel, IonBadge],
+  imports: [CommonModule, RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonList, IonItem, IonLabel, StatusBadgeComponent],
 })
 export class HomePage {
   criancas: Crianca[] = [];
@@ -40,13 +41,16 @@ export class HomePage {
     return this.criancaService.listarPorFamilia(familia);
   }
 
-  temPendencia(criancaId: string): boolean {
-    const doses = this.doseVacinaService.listarPorCrianca(criancaId);
-    return doses.some(d => d.getStatus() === StatusVacina.ATRASADA);
+  statusDaCrianca(criancaId: string): StatusVacina {
+    return this.doseVacinaService.obterStatusGeral(criancaId);
   }
 
-  temPendenciaNaFamilia(familia: string): boolean {
-    return this.criancasDaFamilia(familia).some(c => this.temPendencia(c.id));
+  statusDaFamilia(familia: string): StatusVacina {
+    const statusDeCadaCrianca = this.criancasDaFamilia(familia)
+      .map(c => this.statusDaCrianca(c.id));
+    if (statusDeCadaCrianca.includes(StatusVacina.ATRASADA)) return StatusVacina.ATRASADA;
+    if (statusDeCadaCrianca.includes(StatusVacina.PENDENTE)) return StatusVacina.PENDENTE;
+    return StatusVacina.EM_DIA;
   }
 
   irParaFamilia(familia: string) {

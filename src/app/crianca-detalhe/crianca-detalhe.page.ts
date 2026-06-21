@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
-  IonButtons, IonBackButton, IonList, IonItem, IonLabel, IonBadge
+  IonButtons, IonBackButton, IonList, IonItem, IonLabel
 } from '@ionic/angular/standalone';
 import { Crianca } from '../models/crianca.model';
 import { DoseVacina } from '../models/dose-vacina.model';
 import { Vacina } from '../models/vacina.model';
-import { StatusVacina } from '../models/status-vacina.enum';
 import { CriancaService } from '../services/crianca.service';
 import { DoseVacinaService } from '../services/dose-vacina.service';
 import { VacinaService } from '../services/vacina.service';
+import { StatusBadgeComponent } from '../components/status-badge/status-badge.component';
 
 interface DoseExibicao {
   dose: DoseVacina;
@@ -23,7 +23,7 @@ interface DoseExibicao {
   templateUrl: './crianca-detalhe.page.html',
   styleUrls: ['./crianca-detalhe.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton, IonList, IonItem, IonLabel, IonBadge],
+  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton, IonList, IonItem, IonLabel, StatusBadgeComponent],
 })
 export class CriancaDetalhePage implements OnInit {
   crianca: Crianca | undefined;
@@ -45,24 +45,6 @@ export class CriancaDetalhePage implements OnInit {
         dose,
         vacina: this.vacinaService.buscarPorId(dose.vacinaId)
       }));
-    }
-  }
-
-  corStatus(status: StatusVacina): string {
-    switch (status) {
-      case StatusVacina.EM_DIA: return 'primary';
-      case StatusVacina.PENDENTE: return 'secondary';
-      case StatusVacina.ATRASADA: return 'tertiary';
-      default: return 'medium';
-    }
-  }
-
-  textoStatus(status: StatusVacina): string {
-    switch (status) {
-      case StatusVacina.EM_DIA: return 'Aplicada';
-      case StatusVacina.PENDENTE: return 'Pendente';
-      case StatusVacina.ATRASADA: return 'Atrasada';
-      default: return '';
     }
   }
 }

@@ -16,9 +16,7 @@
         <p *ngIf="item.dose.dataAplicacao">Aplicada em {{ item.dose.dataAplicacao | date:'dd/MM/yyyy' }}</p>
         <p *ngIf="!item.dose.dataAplicacao">Prevista para {{ item.dose.dataPrevista | date:'dd/MM/yyyy' }}</p>
       </ion-label>
-      <ion-badge slot="end" [color]="corStatus(item.dose.getStatus())">
-        {{ textoStatus(item.dose.getStatus()) }}
-      </ion-badge>
+      <app-status-badge slot="end" [status]="item.dose.getStatus()"></app-status-badge>
     </ion-item>
   </ion-list>
 </ion-content>
