@@ -2,20 +2,30 @@
   <ion-toolbar color="primary">
     <ion-title>Minhas Crianças</ion-title>
     <ion-buttons slot="end">
-    <ion-button routerLink="/campanhas">Campanhas</ion-button>
+      <ion-button routerLink="/campanhas">Campanhas</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let crianca of criancas" [routerLink]="['/crianca-detalhe', crianca.id]" button="true">
+    <ion-item *ngFor="let crianca of criancasSemFamilia()" [routerLink]="['/crianca-detalhe', crianca.id]" button="true">
       <ion-label>
         <h2>{{ crianca.nome }}</h2>
         <p>{{ crianca.calcularIdadeFormatada() }}</p>
       </ion-label>
       <ion-badge slot="end" [color]="temPendencia(crianca.id) ? 'tertiary' : 'primary'">
         {{ temPendencia(crianca.id) ? 'Pendência' : 'Em dia' }}
+      </ion-badge>
+    </ion-item>
+
+    <ion-item *ngFor="let familia of familias()" button="true" (click)="irParaFamilia(familia)">
+      <ion-label>
+        <h2>Família {{ familia }}</h2>
+        <p>{{ criancasDaFamilia(familia).length }} crianças</p>
+      </ion-label>
+      <ion-badge slot="end" [color]="temPendenciaNaFamilia(familia) ? 'tertiary' : 'primary'">
+        {{ temPendenciaNaFamilia(familia) ? 'Pendência' : 'Em dia' }}
       </ion-badge>
     </ion-item>
   </ion-list>

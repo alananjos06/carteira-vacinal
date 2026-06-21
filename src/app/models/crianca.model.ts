@@ -2,7 +2,8 @@ export class Crianca {
   constructor(
     public id: string,
     public nome: string,
-    public dataNascimento: Date
+    public dataNascimento: Date,
+    public familia?: string
   ) {}
 
   calcularIdadeEmMeses(): number {

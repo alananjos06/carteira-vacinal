@@ -24,6 +24,10 @@ da carteira física de vacinação.
   Firestore no futuro sem alterar os componentes de tela.
 - **Paleta de cores obrigatória aplicada via variáveis do Ionic** (`variables.scss`),
   garantindo consistência em toda a aplicação sem repetir códigos de cor pelo código.
+- **Agrupamento de crianças por família**: crianças que pertencem à mesma família
+  (ex: irmãos) aparecem como uma única linha resumida na lista principal, em vez de
+  repetidas individualmente. Isso evita poluição visual, podendo assim acessar a família em que os detalhes de cada criança serão exibidos
+  separadamente, mantendo o histórico de cada uma isolado.
 
 ## Tecnologias
 - Ionic Framework

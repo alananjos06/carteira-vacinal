@@ -18,4 +18,8 @@ export const routes: Routes = [
     path: 'campanhas',
     loadComponent: () => import('./campanhas/campanhas.page').then( m => m.CampanhasPage)
   },
+  {
+    path: 'familia/:nome',
+    loadComponent: () => import('./familia-detalhe/familia-detalhe.page').then( m => m.FamiliaDetalhePage)
+  },
 ];
